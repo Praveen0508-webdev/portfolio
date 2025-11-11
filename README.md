@@ -1,73 +1,155 @@
-# Welcome to your Lovable project
+# 🌐 Portfolio Website
 
-## Project info
+A modern, responsive personal portfolio built with **Vite**, **React**, **TypeScript**, and **shadcn/ui**.  
+Showcases your projects, skills, and experience with a fast and elegant interface.
 
-**URL**: https://lovable.dev/projects/3d10c15e-da86-42f1-b8cf-c881d9d4252e
+---
 
-## How can I edit this code?
+## 🚀 Tech Stack
 
-There are several ways of editing your application.
+| Category | Tools |
+|-----------|--------|
+| Framework | [React](https://react.dev/) |
+| Bundler | [Vite](https://vitejs.dev/) |
+| Language | [TypeScript](https://www.typescriptlang.org/) |
+| UI Library | [shadcn/ui](https://ui.shadcn.com/) |
+| Styling | [Tailwind CSS](https://tailwindcss.com/) |
+| Icons | [Lucide React](https://lucide.dev/icons) |
+| Deployment | [GitHub Pages](https://pages.github.com/) |
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3d10c15e-da86-42f1-b8cf-c881d9d4252e) and start prompting.
+## 🧰 Project Setup
 
-Changes made via Lovable will be committed automatically to this repo.
+### 1️⃣ Install dependencies
+```bash
+npm install
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2️⃣ Run the development server
 npm run dev
-```
 
-**Edit a file directly in GitHub**
+Your app will be available at http://localhost:5173.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+🏗️ Build for production
+npm run build
 
-**Use GitHub Codespaces**
+This creates an optimized dist/ folder with all static assets.
+To preview the production build locally:
+npm run preview
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
+🌍 Deployment
+This project is configured for GitHub Pages deployment.
+Option 1 — Deploy via GitHub Actions (recommended)
 
-This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Push your project to a GitHub repository.
 
-## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/3d10c15e-da86-42f1-b8cf-c881d9d4252e) and click on Share -> Publish.
+Ensure your vite.config.ts contains:
+export default defineConfig({
+  base: '/<REPO_NAME>/',
+  plugins: [react()],
+})
 
-## Can I connect a custom domain to my Lovable project?
 
-Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Add .github/workflows/deploy.yml (see below).
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+In GitHub → Settings → Pages → Source, select GitHub Actions.
+
+
+Your site will auto-deploy every time you push to main.
+Option 2 — Manual deploy using gh-pages
+If you prefer manual deployment:
+npm install gh-pages --save-dev
+npm run build
+npm run deploy
+
+This publishes your dist/ folder to the gh-pages branch automatically.
+
+⚙️ Project Scripts
+CommandDescriptionnpm run devStart development servernpm run buildBuild production filesnpm run build:devBuild in development modenpm run previewPreview built app locallynpm run lintRun ESLint to check for issuesnpm run deployDeploy to GitHub Pages (if configured)
+
+🧩 Folder Structure
+portfolioweb/
+├── public/              # Static assets
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Page components (e.g., Home, Projects)
+│   ├── assets/          # Images, icons, etc.
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utilities, helpers
+│   ├── App.tsx          # Main app entry
+│   └── main.tsx         # Root render
+├── .github/workflows/   # GitHub Actions workflows
+├── vite.config.ts       # Vite configuration
+├── tailwind.config.ts   # Tailwind configuration
+├── package.json         # Dependencies & scripts
+└── README.md            # You’re reading it!
+
+
+💡 Customization
+
+
+Update your name, title, and about info in src/components or src/pages.
+
+
+Add your projects and links in a projects.ts or similar data file.
+
+
+Adjust the color palette and typography in tailwind.config.ts.
+
+
+Add new UI components using:
+npx shadcn-ui@latest add <component-name>
+
+
+
+
+📦 Deployment Workflow Example
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: cp dist/index.html dist/404.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/deploy-pages@v4
+
+
+🧑‍💻 Author
+Your Name
+💼 Portfolio: https://yourusername.github.io/portfolioweb
+🐙 GitHub: https://github.com/yourusername
+
+🪪 License
+This project is open source under the MIT License.
+
+
+💬 Built with ❤️ using React, TypeScript, and Vite.
+
+
+---
+
+Would you like me to **personalize this README** (e.g., add your name, GitHub username, or portfolio URL) before you copy it in?  
+If you share those details, I’ll fill them in and tailor the badges + deployment section exactly for your repo.
